@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = (TokenAuthentication,)
+    permission_classes = [IsAuthenticated]  #add globally in seetings or here
+    authentication_classes = (TokenAuthentication,)  #add globally in set tings or here
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -24,7 +24,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 '''
 
-class ArticleViewSet(viewsets.GenericViewSet, mixins.ListModelMixin,
+class ArticleViewSet(viewsets.GenericViewSet, mixins.ListModelMixin,#5
                      mixins.CreateModelMixin, mixins.RetrieveModelMixin,
                      mixins.UpdateModelMixin, mixins.DestroyModelMixin):
 
@@ -36,7 +36,7 @@ class ArticleViewSet(viewsets.GenericViewSet, mixins.ListModelMixin,
 
 
 '''
-class ArticleViewSet(viewsets.ViewSet):
+class ArticleViewSet(viewsets.ViewSet):#4
 
     def list(self, request):
         articles = Article.objects.all()
@@ -75,7 +75,7 @@ class ArticleViewSet(viewsets.ViewSet):
 '''
 '''
 
-class ArticleList(generics.GenericAPIView, mixins.ListModelMixin,
+class ArticleList(generics.GenericAPIView, mixins.ListModelMixin,#3
                   mixins.CreateModelMixin):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
@@ -113,7 +113,7 @@ class ArticleDetails(generics.GenericAPIView, mixins.RetrieveModelMixin,
 '''
 '''
 
-class ArticleList(APIView):
+class ArticleList(APIView):#2
 
     def get(self, request):
         articles = Article.objects.all()
@@ -162,7 +162,7 @@ class ArticleDetails(APIView):
 '''
 '''
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST'])#1
 def article_list(request):
 
     #get all articles
